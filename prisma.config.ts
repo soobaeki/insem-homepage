@@ -9,6 +9,8 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Prisma CLI(db push, migrate) 실행 시에는 directUrl(5432 포트)을 사용하고,
+    // 없는 경우 DATABASE_URL을 바라보도록 설정합니다.
+    url: process.env["DIRECT_URL"] ?? process.env["DATABASE_URL"],
   },
 });
